@@ -19,7 +19,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 BASE_DIR = Path(__file__).resolve().parent
-MODEL_PATH = BASE_DIR / "Models" / "modelo_random_forest_ampliado.pkl"
+MODEL_PATH = BASE_DIR / "models" / "modelo_random_forest_ampliado.pkl"
 
 @st.cache_resource
 def load_model():
