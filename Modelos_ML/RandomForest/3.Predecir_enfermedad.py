@@ -17,9 +17,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR / "Models" / "modelo_random_forest_ampliado.pkl"
+
 @st.cache_resource
 def load_model():
-    return joblib.load("Models/modelo_random_forest_ampliado.pkl")
+    return joblib.load(MODEL_PATH)
 
 model = load_model()
 features = model.feature_names_in_  # Lista de 34 columnas
