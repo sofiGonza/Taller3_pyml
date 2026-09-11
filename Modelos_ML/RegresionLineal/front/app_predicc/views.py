@@ -8,10 +8,13 @@ def tasador(request):
 
     if request.method == 'POST':
         area_raw = request.POST.get('area_m2', '').strip()
+
         contexto['area_ingresada'] = area_raw
 
         try:
-            area_m2 = float(area_raw)
+            # Permitir coma o punto como separador decimal
+            area_m2 = float(area_raw.replace(',', '.'))
+
             if area_m2 <= 0:
                 raise ValueError
 
@@ -20,7 +23,9 @@ def tasador(request):
                 json={'area_m2': area_m2},
                 timeout=5,
             )
+
             respuesta.raise_for_status()
+
             data = respuesta.json()
 
             contexto['exito'] = True
@@ -29,9 +34,15 @@ def tasador(request):
 
         except ValueError:
             contexto['error'] = 'Ingresa un número válido (ej: 85.5).'
-        except requests.exceptions.ConnectionError as e:
-            contexto["error"] = f"No fue posible conectar: {e}"
+
+        except requests.exceptions.ConnectionError:
+            contexto['error'] = 'No fue posible conectar con la API de predicción.'
+
         except requests.exceptions.RequestException as e:
             contexto['error'] = f'Ocurrió un error al calcular el precio: {e}'
 
-    return render(request, 'app_predicc/index.html', contexto)
+    return render(
+        request,
+        'app_predicc/index.html',
+        contexto
+    )
