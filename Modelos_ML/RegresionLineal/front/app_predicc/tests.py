@@ -33,3 +33,12 @@ class TasadorViewTests(TestCase):
         self.assertContains(response, '250.000.000')
         mock_post.assert_called_once()
         self.assertEqual(mock_post.call_args.kwargs['json'], {'area_m2': 85.5})
+
+    @patch('app_predicc.views.requests.post')
+    def test_valid_area_reports_api_connection_error_separately(self, mock_post):
+        mock_post.side_effect = __import__('requests').exceptions.ConnectionError
+
+        response = self.client.post('/', {'area_m2': '85.5'}, secure=True)
+
+        self.assertContains(response, 'No se pudo conectar con la API')
+        self.assertNotContains(response, 'Ingresa un número válido')
