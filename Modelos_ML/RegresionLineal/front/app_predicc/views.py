@@ -25,7 +25,7 @@ def tasador(request):
 
             contexto['exito'] = True
             contexto['area_m2'] = data.get('area_m2')
-            contexto['precio_estimado'] = data.get('predicted_price')
+            contexto['precio_estimado'] = data.get('predicted_price')*1000
 
         except ValueError:
             contexto['error'] = 'Ingresa un número válido (ej: 85.5).'
