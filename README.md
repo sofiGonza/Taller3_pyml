@@ -2,6 +2,17 @@
 
 Repositorio académico con ejemplos de carga y preparación de datos, modelos de machine learning y aplicaciones web para consultar predicciones y procesar imágenes.
 
+Modelo_ML: link de predecir Enfermedad desplegado
+https://taller3pyml-prucdkadnovapj4swm38nv.streamlit.app
+
+Regresion Lineal desplegado
+front: https://frontend-production-4471.up.railway.app
+back: https://backend-production-b18e.up.railway.app
+
+Py_img desplegado
+https://pyimagenes.vercel.app
+
+
 ## Contenido
 
 - [Descripción general](#descripción-general)
